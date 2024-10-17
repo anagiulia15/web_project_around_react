@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+import Logo from "./logo.svg";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Main from "./components/main";
@@ -39,7 +39,7 @@ function App() {
       />
       <Main setSelectCard={setselectedCard} />
       <Footer />
-      <PopupwithImage selectedCard={selectedCard}/>
+      <PopupwithImage selectedCard={selectedCard} handleClosePopups={handleClosePopup}/>
       <PopupwithForm name="profile" title="editar perfil" isOpen={isEditProfilePopupOpen} handleClose={handleClosePopups}>
         <fieldset className="form__set">
           <input
