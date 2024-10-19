@@ -1,9 +1,8 @@
-import Logo from "./logo.svg";
-import Header from "./components/header";
-import Footer from "./components/footer";
-import Main from "./components/main";
-import PopupwithForm from "./components/popupwithForm";
-import PopupwithImage from "./components/popupimage";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Main from "./components/Main";
+import PopupWithForm from "./components/PopupWithForm";
+import PopupImage from "./components/PopupImage";
 import { useState } from "react";
 
 function App() {
@@ -39,8 +38,8 @@ function App() {
       />
       <Main setSelectCard={setselectedCard} />
       <Footer />
-      <PopupwithImage selectedCard={selectedCard} handleClosePopups={handleClosePopup}/>
-      <PopupwithForm name="profile" title="editar perfil" isOpen={isEditProfilePopupOpen} handleClose={handleClosePopups}>
+      <PopupImage selectedCard={selectedCard} handleClosePopups={handleClosePopups}/>
+      <PopupWithForm name="profile" title="editar perfil" isOpen={isEditProfilePopupOpen} handleClose={handleClosePopups}>
         <fieldset className="form__set">
           <input
             type="text"
@@ -63,8 +62,8 @@ function App() {
           />
           <span className="form__error form__error_about"></span>
         </fieldset>
-      </PopupwithForm>
-      <PopupwithForm name="card" title="nuevo lugar" isOpen={isAddPlacePopupOpen} handleClose={handleClosePopups} >
+      </PopupWithForm>
+      <PopupWithForm name="card" title="nuevo lugar" isOpen={isAddPlacePopupOpen} handleClose={handleClosePopups} >
         <fieldset class="form__set">
           <input
             type="text"
@@ -85,8 +84,8 @@ function App() {
           />
           <span class="form__error form__error_link"></span>
         </fieldset>
-      </PopupwithForm>
-      <PopupwithForm name="avatar" title="editar avatar" isOpen={isEditAvatarPopupOpen} handleClose={handleClosePopups}>
+      </PopupWithForm>
+      <PopupWithForm name="avatar" title="editar avatar" isOpen={isEditAvatarPopupOpen} handleClose={handleClosePopups}>
         <fieldset class="form__set">
           <input
             type="url"
@@ -95,7 +94,7 @@ function App() {
             required
           />
         </fieldset>
-      </PopupwithForm>
+      </PopupWithForm>
     </div>
   );
 }

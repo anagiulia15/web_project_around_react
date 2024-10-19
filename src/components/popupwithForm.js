@@ -1,4 +1,4 @@
-export default function PopupwithForm({
+export default function PopupWithForm({
   children,
   name,
   title,

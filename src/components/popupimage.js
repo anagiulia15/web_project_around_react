@@ -1,4 +1,4 @@
-export default function PopupwithImage({ selectedCard,handleClosePopup }) {
+export default function PopupImage({ selectedCard,handleClosePopup }) {
   return (
     <div class={"popup " + (selectedCard ? "popup_show" : "")} id="popupopenimage">
       <div class="popup__overlay"></div>

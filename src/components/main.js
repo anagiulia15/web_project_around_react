@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react";
-import Header from "./header";
+
 import api from "../utils/api";
-import Card from "./card";
+import Card from "./Cards";
 
 export default function Main(props) {
   const [userName, setuserName] = useState(false)
