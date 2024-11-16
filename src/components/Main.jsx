@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import api from "../utils/api";
 import Card from "./Cards";
-import { currentuserContext } from "./CurrentUserContext";
+import { currentuserContext } from "../contexts/CurrentUserContext";
 
 export default function Main(props) {
   const currentUser = useContext(currentuserContext);

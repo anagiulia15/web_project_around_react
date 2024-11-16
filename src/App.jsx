@@ -4,7 +4,7 @@ import Main from "./components/Main";
 import PopupWithForm from "./components/PopupWithForm";
 import ImagePopup from "./components/ImagePopup";
 import { useState, useEffect } from "react";
-import { currentuserContext } from "./components/CurrentUserContext";
+import { currentuserContext } from "./contexts/CurrentUserContext";
 import api from "./utils/api";
 import EditProfile from "./components/EditProfile";
 import EditAvatar from "./components/EditAvatar";

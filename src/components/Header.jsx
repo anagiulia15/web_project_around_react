@@ -1,7 +1,7 @@
 import Avatar from "../images/image.jpg";
 import Logo from "../images/logo.png";
 import { useContext } from "react";
-import { currentuserContext } from "./CurrentUserContext";
+import { currentuserContext } from "../contexts/CurrentUserContext";
 export default function Header(props) {
   const currentUser = useContext(currentuserContext)
   return (

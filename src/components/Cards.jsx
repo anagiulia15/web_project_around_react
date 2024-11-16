@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { currentuserContext } from "./CurrentUserContext";
+import { currentuserContext } from "../contexts/CurrentUserContext";
 export default function Card({ card, setSelectCard, onDelete, onLike }) {
   const currentUser = useContext(currentuserContext);
   // Verificando si el usuario actual es el propietario de la tarjeta actual
