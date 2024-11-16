@@ -31,7 +31,7 @@ export default function Card({ card, setSelectCard, onDelete, onLike }) {
   };
 
   const isOwner = () => {
-    return card.owner._id === currentUser._id;
+    return card.owner === currentUser._id;
   };
 
   return (

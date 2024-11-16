@@ -3,7 +3,7 @@ import {useEffect, useContext} from "react"
 import { currentuserContext } from "./CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
-export default function EditAvatarPoupup({
+export default function EditAvatar({
     isEditProfilePopupOpen,
     handleClosePoups,
     onUpdateUser,

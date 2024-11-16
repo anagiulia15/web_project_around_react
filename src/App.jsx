@@ -6,20 +6,71 @@ import ImagePopup from "./components/ImagePopup";
 import { useState, useEffect } from "react";
 import { currentuserContext } from "./components/CurrentUserContext";
 import api from "./utils/api";
-import EditProfilePopup from "./components/EditProfilePopup";
-import EditAvatarPoupup from "./components/EditAvatarPopup";
-import AddPlacePopup from "./components/AddplacePopup";
-import PopupDelete from "./components/PopupDelete"
+import EditProfile from "./components/EditProfile";
+import EditAvatar from "./components/EditAvatar";
+import NewCard from "./components/NewCard";
+import PopupDelete from "./components/PopupDelete";
 
 function App() {
   const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = useState(false);
+  const [isPopupDeleteOpen,setisPopupDeleteOpen]= useState(false)
   const [isImageOpen, setImageOpen] = useState(false);
   const [selectedCard, setselectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
-  function handleAddPlaceSubmit() {
-    api.storeCard().then(() => {});
+
+  const [cards, setCards] = useState([]);
+
+  function handleDelete(card) {
+    setisPopupDeleteOpen(true);
+    setselectedCard(card);
+    /*
+   
+      */
+  }
+
+  function onDelete() {
+    api
+    .deleteCard(selectedCard._id)
+    .then(() => {
+      setisPopupDeleteOpen(false)
+      return api.getCards();
+    })
+    .then((elements) => {
+      setCards(elements);      
+    });
+  }
+
+  function handleLike(card) {
+    const userLike = card.isLiked;
+    if (userLike) {
+      api.removeLike(card._id).then((newCard) => {
+        console.log(newCard);
+        const cardFound = cards.find((item) => card._id === item._id);
+        cardFound.isLiked = newCard.isLiked;
+        setCards([...cards]);
+      });
+    } else {
+      api.addLike(card._id).then((newCard) => {
+        console.log(newCard);
+        const cardFound = cards.find((item) => card._id === item._id);
+        cardFound.isLiked = newCard.isLiked;
+        setCards([...cards]);
+      });
+    }
+  }
+
+  useEffect(() => {
+    api.getCards().then((cards) => {
+      setCards(cards);
+    });
+  }, []);
+
+  function handleAddPlaceSubmit(name, link) {
+    api.storeCard(name, link).then((card) => {
+      setCards([card, ...cards]);
+    });
   }
   function handleEditAvatarClick() {
     setisEditAvatarPopupOpen(true);
@@ -36,6 +87,7 @@ function App() {
     setisAddPlacePopupOpen(false);
     setisEditProfilePopupOpen(false);
     setisEditProfilePopupOpen(false);
+    setisPopupDeleteOpen(false);
     setImageOpen(false);
   }
   useEffect(() => {
@@ -60,6 +112,9 @@ function App() {
           handleAddPlaceClick={handleAddPlaceClick}
         />
         <Main
+          cards={cards}
+          handleDelete={handleDelete}
+          handleLike={handleLike}
           setSelectCard={(element) => {
             setselectedCard(element);
             setImageOpen(true);
@@ -72,32 +127,28 @@ function App() {
           handleClosePopups={handleClosePopups}
         />
 
-        <EditProfilePopup
+        <EditProfile
           isEditProfilePopupOpen={isEditProfilePopupOpen}
           onUpdateUser={onUpdateUser}
           handleClosePopups={handleClosePopups}
         />
-        <EditAvatarPoupup
+        <EditAvatar
           isEditProfilePopupOpen={isEditAvatarPopupOpen}
           onUpdateUser={onUpdateUser}
           handleClosePopups={handleClosePopups}
         />
 
-        <AddPlacePopup
+        <NewCard
           isOpen={isAddPlacePopupOpen}
           handleClosePopups={handleClosePopups}
           onAddPlaceSubmit={handleAddPlaceSubmit}
         />
-        {/*
+        
        <PopupDelete
-       handleSubmit={handleSubmit}
-      isOpen={}
-      handleClose={handleClosePopups}/>
-
-     <handleSubmit/>
-    */}
-       
-       
+        handleSubmit={onDelete}
+        isOpen={isPopupDeleteOpen}
+        handleClose={handleClosePopups}/>  
+  
       </div>
     </currentuserContext.Provider>
   );

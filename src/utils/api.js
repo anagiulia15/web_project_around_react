@@ -69,7 +69,7 @@ class Api {
       }).then((response) => response.json());
     }
     addLike(cardId) {
-      return fetch(`${this._url}/cards/likes/${cardId}`, {
+      return fetch(`${this._url}/cards/${cardId}/likes/`, {
         method: "PUT",
         headers: {
           authorization: this._token,
@@ -78,7 +78,7 @@ class Api {
       }).then((response) => response.json());
     }
     removeLike(cardId) {
-      return fetch(`${this._url}/cards/likes/${cardId}`, {
+      return fetch(`${this._url}/cards/${cardId}/likes/`, {
         method: "DELETE",
         headers: {
           authorization: this._token,
