@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PopupWithForm from "./PopupWithForm";
 
-export default function newCard({
+export default function NewCard({
   isEditProfilePopup,
   handleClosePopups,
 
