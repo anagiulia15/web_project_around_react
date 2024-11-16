@@ -10,12 +10,13 @@ import EditProfile from "./components/EditProfile";
 import EditAvatar from "./components/EditAvatar";
 import NewCard from "./components/NewCard";
 import PopupDelete from "./components/PopupDelete";
+import Popup from "./components/Popup";
 
 function App() {
   const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = useState(false);
-  const [isPopupDeleteOpen,setisPopupDeleteOpen]= useState(false)
+  const [isPopupDeleteOpen, setisPopupDeleteOpen] = useState(false);
   const [isImageOpen, setImageOpen] = useState(false);
   const [selectedCard, setselectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
@@ -25,21 +26,19 @@ function App() {
   function handleDelete(card) {
     setisPopupDeleteOpen(true);
     setselectedCard(card);
-    /*
-   
-      */
+    
   }
 
   function onDelete() {
     api
-    .deleteCard(selectedCard._id)
-    .then(() => {
-      setisPopupDeleteOpen(false)
-      return api.getCards();
-    })
-    .then((elements) => {
-      setCards(elements);      
-    });
+      .deleteCard(selectedCard._id)
+      .then(() => {
+        setisPopupDeleteOpen(false);
+        return api.getCards();
+      })
+      .then((elements) => {
+        setCards(elements);
+      });
   }
 
   function handleLike(card) {
@@ -70,6 +69,7 @@ function App() {
   function handleAddPlaceSubmit(name, link) {
     api.storeCard(name, link).then((card) => {
       setCards([card, ...cards]);
+      setisAddPlacePopupOpen(false)
     });
   }
   function handleEditAvatarClick() {
@@ -143,12 +143,13 @@ function App() {
           handleClosePopups={handleClosePopups}
           onAddPlaceSubmit={handleAddPlaceSubmit}
         />
-        
-       <PopupDelete
-        handleSubmit={onDelete}
-        isOpen={isPopupDeleteOpen}
-        handleClose={handleClosePopups}/>  
-  
+
+        <PopupDelete
+          handleSubmit={onDelete}
+          isOpen={isPopupDeleteOpen}
+          handleClose={handleClosePopups}
+        />
+        <Popup />
       </div>
     </currentuserContext.Provider>
   );
